@@ -3,3 +3,19 @@
 body {
   margin: 0;
 }
+
+.weather {
+  position: relative;
+}
+
+.weather__info {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  color: white;
+  font-size: 40px;
+}
+
+.weather__image {
+  width: 100%;
+}
