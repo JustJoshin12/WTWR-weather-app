@@ -1,9 +1,5 @@
 
 
-body {
-  margin: 0;
-}
-
 .weather {
   position: relative;
 }
@@ -13,9 +9,13 @@ body {
   top: 20px;
   left: 16px;
   color: white;
-  font-size: 40px;
+  font-size: 36px;
 }
 
 .weather__image {
   width: 100%;
+}
+
+.main {
+  padding:0 20px;
 }
