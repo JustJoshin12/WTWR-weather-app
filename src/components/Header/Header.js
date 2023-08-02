@@ -8,13 +8,13 @@ function Header() {
       <header className="header">
         <div className="header__logo">
         <div><img src={wtwrLogo} alt="logo"/></div>
-        <div>Date</div> 
+        <div className="header__date">June 15, New York</div> 
         </div>
         <div className="header__avatar-logo">
         <div>
-          <button type="text" >+ Add New Clothes</button>
+          <button type="text" className="header__button">+ Add clothes</button>
         </div>
-        <div>Joshua Smith</div>
+        <div className="header__avatar-name">Joshua Smith</div>
         <div><img src={avatar} alt="avatar logo"/></div>
         </div>
       </header>
