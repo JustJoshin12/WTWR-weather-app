@@ -2,7 +2,7 @@ import "./Header.css";
 import wtwrLogo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg"
 
-function Header() {
+function Header({onCreateModal}) {
   return (
     <div>
       <header className="header">
@@ -12,7 +12,7 @@ function Header() {
         </div>
         <div className="header__avatar-logo">
         <div>
-          <button type="text" className="header__button">+ Add clothes</button>
+          <button type="text" className="header__button" onClick={onCreateModal}>+ Add clothes</button>
         </div>
         <div className="header__avatar-name">Joshua Smith</div>
         <div><img src={avatar} alt="avatar logo"/></div>

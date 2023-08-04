@@ -1,0 +1,103 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../../fonts/CabinetGrotesk-Medium.woff") format("woff");
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal__content {
+  position: relative;
+  background-color: white;
+  max-width: 496px;
+  width: 100%;
+  border-radius: 20px;
+  padding: 28px 28px 36px 28px;
+}
+
+.modal__submit-button {
+  width: 124px;
+  height: 36px;
+  color: rgba(255, 255, 255, 1);
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: 4px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.modal__header {
+  color: #000;
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 0;
+}
+
+.modal__close-button {
+  border: 0;
+  width: 16px;
+  height: 16px;
+  background: url(../../images/CloseButton.svg) no-repeat center;
+  position: absolute;
+  top: 20px;
+  right: 28px;
+}
+
+.modal__form-contents {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+
+.modal__input-title {
+  color: #000;
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+}
+
+.modal__input {
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  border: 0;
+  width: 100%;
+}
+
+.modal__weather-type {
+  color: #000;
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.modal__weather-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal__weather-section {
+  color: #000;
+  font-family: "Cabinet Grotesk";
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px; 
+}
