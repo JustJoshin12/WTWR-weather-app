@@ -3,12 +3,15 @@ import wtwrLogo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg"
 
 function Header({onCreateModal}) {
+
+  const currentDate = new Date().toLocaleString('default', { month: 'long', day: 'numeric' });
+  
   return (
     <div>
       <header className="header">
         <div className="header__logo">
         <div><img src={wtwrLogo} alt="logo"/></div>
-        <div className="header__date">June 15, New York</div> 
+        <div className="header__date">{currentDate}, New York</div> 
         </div>
         <div className="header__avatar-logo">
         <div>

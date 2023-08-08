@@ -90,7 +90,7 @@
       border-radius: 50%;
   }
 
-  .modal__radio-button:checked + label{
+  .modal__radio-button:checked {
      background-color: black;
      height: 16px;
      width: 16px;
