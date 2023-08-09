@@ -1,12 +1,12 @@
 import "../Main/Main.css";
-import WeatherCard from "../weatherCard/weatherCard";
+import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
-import defaultClothingItems from "../../utils/constant";
+import {defaultClothingItems} from "../../utils/constant";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useMemo } from "react";
 import { timeOfDayData } from "../../utils/WeatherAPI/WeatherAPI";
-import { GetForecastWeather } from "../../utils/WeatherAPI/WeatherAPI";
+import { getForecastWeather } from "../../utils/WeatherAPI/WeatherAPI";
 import { parseWeatherConditon } from "../../utils/WeatherAPI/WeatherAPI";
 
 function Main({ weatherTemp, onSelectCard }) {
@@ -24,7 +24,7 @@ function Main({ weatherTemp, onSelectCard }) {
   }, [weatherTemp]);
 
 function daytime () {
-    GetForecastWeather()
+    getForecastWeather()
     .then((data)=>{
       const weatherTimeData = timeOfDayData(data);
       const currentTime = Date.now();
@@ -39,7 +39,7 @@ function daytime () {
   };
 
   useEffect( () => {
-    GetForecastWeather()
+    getForecastWeather()
     .then((data)=>{
       const weatherCondition = parseWeatherConditon(data);
       console.log(weatherCondition)
@@ -64,7 +64,7 @@ function daytime () {
         </div>
         <div className="card__items">
           {filteredCards.map((item) => {
-            return <ItemCard item={item} onSelectCard={onSelectCard} />;
+            return <ItemCard item={item} key={item._id} onSelectCard={onSelectCard} />;
           })}
         </div>
       </section>
