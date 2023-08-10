@@ -9,31 +9,29 @@ function Header({ onCreateModal }) {
   });
 
   return (
-    <>
-      <header className="header">
-        <div className="header__logo">
-          <div>
-            <img src={wtwrLogo} alt="logo" />
-          </div>
-          <div className="header__date">{currentDate}, New York</div>
+    <header className="header">
+      <div className="header__logo">
+        <div>
+          <img src={wtwrLogo} alt="logo" />
         </div>
-        <div className="header__avatar-logo">
-          <div>
-            <button
-              type="text"
-              className="header__button"
-              onClick={onCreateModal}
-            >
-              + Add clothes
-            </button>
-          </div>
-          <div className="header__avatar-name">Joshua Smith</div>
-          <div>
-            <img src={avatar} alt="avatar logo" />
-          </div>
+        <div className="header__date">{currentDate}, New York</div>
+      </div>
+      <div className="header__avatar-logo">
+        <div>
+          <button
+            type="text"
+            className="header__button"
+            onClick={onCreateModal}
+          >
+            + Add clothes
+          </button>
         </div>
-      </header>
-    </>
+        <div className="header__avatar-name">Joshua Smith</div>
+        <div>
+          <img src={avatar} alt="avatar logo" />
+        </div>
+      </div>
+    </header>
   );
 }
 
