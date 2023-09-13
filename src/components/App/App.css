@@ -5,5 +5,9 @@
     padding: 0 20px;
 }
 
+.profile {
+    display: flex;
+    padding: 40px;
+}
 
 

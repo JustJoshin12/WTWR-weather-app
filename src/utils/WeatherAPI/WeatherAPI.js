@@ -1,7 +1,7 @@
 //https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}
 //api key 9d88578d96b363adcadf5a0117ea7c43
-const latitude = 44.34;
-const longitude = 10.99;
+const latitude = 41.9575;
+const longitude = -88.0809;
 const APIkey = "9d88578d96b363adcadf5a0117ea7c43";
 export const getForecastWeather = () => {
   const weatherApi = fetch(
@@ -19,14 +19,16 @@ export const getForecastWeather = () => {
 export const parseWeatherData = (data) => {
   const main = data.main;
   const temperature = main && main.temp;
-  return Math.ceil(temperature);
+  const weather = {temperature: {F: Math.round(temperature), C: Math.round((temperature - 32) * 5/9)}};
+  console.log(weather);
+  return weather;
 };
 
 export const timeOfDayData = (data) => {
   const system = data.sys;
   const sunriseTimeInMillis = system.sunrise * 1000;
   const sunsetTimeInMillis = system.sunset * 1000;
-  let time = {
+  const time = {
     sunrise: sunriseTimeInMillis,
     sunset: sunsetTimeInMillis,
   };
@@ -34,8 +36,16 @@ export const timeOfDayData = (data) => {
 };
 
 export const parseWeatherConditon = (data) => {
-    const weatherData = data.weather;
-    const currentWeatherCondition = weatherData[0].main.toLowerCase();
-    return currentWeatherCondition
-    
+  const weatherData = data.weather;
+  const currentWeatherCondition = weatherData[0].main.toLowerCase();
+  return currentWeatherCondition;
+};
+
+export const parseWeatherLocation = (data) => {
+   const weatherLocation = data.name;
+   return weatherLocation;
+  
 }
+
+// weather.temperature.F = `${Math.round(data.main.temp)}°F`
+// weather.temperature.C = `${Math.round((data.main.temp - 32) * 5/9)}°C`

@@ -1,4 +1,4 @@
-import daySunny from '../images/day/sunny.svg';
+import daySunny from "../images/day/sunny.svg";
 import dayCloudy from "../images/day/cloudy.svg";
 import dayFog from "../images/day/fog.svg";
 import dayRain from "../images/day/rain.svg";
@@ -10,8 +10,6 @@ import nightMoon from "../images/night/moon.svg";
 import nightRain from "../images/night/rain.svg";
 import nightSnow from "../images/night/snow.svg";
 import nightStorm from "../images/night/storm.svg";
-
-
 
 export const defaultClothingItems = [
   {
@@ -59,17 +57,22 @@ export const weatherOptions = [
     type: "sunny",
   },
   {
+    url: daySunny,
+    day: true,
+    type: "clear",
+  },
+  {
     url: dayCloudy,
     day: true,
     type: "clouds",
   },
-  { 
-    url: dayFog, 
-    day: true, 
-    type: "fog" 
+  {
+    url: dayFog,
+    day: true,
+    type: "fog",
   },
   {
-    url:dayRain,
+    url: dayRain,
     day: true,
     type: "rain",
   },
@@ -81,7 +84,7 @@ export const weatherOptions = [
   {
     url: dayStorm,
     day: true,
-    type: "storm",
+    type: "thunderstorm",
   },
   {
     url: nightFog,
@@ -101,7 +104,7 @@ export const weatherOptions = [
   {
     url: nightStorm,
     day: false,
-    type: "storm",
+    type: "thunderstorm",
   },
   {
     url: nightCloudy,
@@ -111,6 +114,6 @@ export const weatherOptions = [
   {
     url: nightMoon,
     day: false,
-    type: "moon",
+    type: "clear",
   },
 ];

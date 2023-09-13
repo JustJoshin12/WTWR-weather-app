@@ -1,8 +1,9 @@
 import "./Header.css";
 import wtwrLogo from "../../images/logo.svg";
 import avatar from "../../images/avatar.svg";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 
-function Header({ onCreateModal }) {
+function Header({ onCreateModal, location }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -14,9 +15,10 @@ function Header({ onCreateModal }) {
         <div>
           <img src={wtwrLogo} alt="logo" />
         </div>
-        <div className="header__date">{currentDate}, New York</div>
+        <div className="header__date">{currentDate}, {location}</div>
       </div>
       <div className="header__avatar-logo">
+        <ToggleSwitch/>
         <div>
           <button
             type="text"
