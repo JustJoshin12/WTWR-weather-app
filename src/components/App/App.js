@@ -14,9 +14,9 @@ import "./App.css";
 import { useState, useEffect, useMemo } from "react";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
-import avatar from "../../images/avatar.svg";
 import { defaultClothingItems } from "../../utils/constant";
-import ItemCard from "../ItemCard/ItemCard";
+import Profile from "../Profile/Profile";
+
 
 function App() {
   // Use States
@@ -53,7 +53,6 @@ function App() {
       });
   }, []);
 
-
   const weatherType = useMemo(() => {
     if (temp >= 86) {
       return "hot";
@@ -68,8 +67,7 @@ function App() {
     return item.weather.toLowerCase() === weatherType;
   });
 
-  console.log(filteredCards)
-
+  console.log(filteredCards);
 
   // Setter Functions
 
@@ -94,8 +92,8 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    console.log(values)
-  }
+    console.log(values);
+  };
 
   return (
     <div>
@@ -114,36 +112,16 @@ function App() {
             />
           </Route>
           <Route path="/profile">
-            <main className="profile">
-              <div className="siderBar">
-                <div className="header__avatar-name">Joshua Smith</div>
-                <div>
-                  <img src={avatar} alt="avatar logo" />
-                </div>
-              </div>
-              <div className="clothes-section">
-                <div className="clothes-section__title">
-                  <h3> Your Items </h3>
-                  <button className="clothes-section__button" type="text">
-                    +Add New
-                  </button>
-                </div>
-                <div className="clothes-section__card">
-                  {filteredCards.map((item) => (
-                    <ItemCard
-                      item={item}
-                      onSelectCard={handleSelectedCard}
-                      key={item.id}
-                    />
-                  ))}
-                </div>
-              </div>
-            </main>
+           <Profile filteredCards={filteredCards} onSelectCard={handleSelectedCard}/>
           </Route>
         </Switch>
         <Footer />
         {activeModal === "create" && (
-          <AddItemModal onClose={handleCloseModal} onAddItem={onAddItem} isOpen={activeModal === "create"}/>
+          <AddItemModal
+            onClose={handleCloseModal}
+            onAddItem={onAddItem}
+            isOpen={activeModal === "create"}
+          />
         )}
         {activeModal === "preview" && (
           <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
