@@ -150,7 +150,7 @@ function App() {
             />
           </Route>
           <Route path="/profile">
-           <Profile filteredCards={filteredCards} onSelectCard={handleSelectedCard}/>
+           <Profile filteredCards={filteredCards} onSelectCard={handleSelectedCard} onCreateModal={handleCreateModal}/>
           </Route>
         </Switch>
         <Footer />
