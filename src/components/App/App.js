@@ -12,7 +12,7 @@ import { timeOfDayData } from "../../utils/WeatherAPI/WeatherAPI";
 import { parseWeatherLocation } from "../../utils/WeatherAPI/WeatherAPI";
 import "./App.css";
 import { useState, useEffect, useMemo } from "react";
-import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
+import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
 import Profile from "../Profile/Profile";
 import { addItems, getItems, deleteItem } from "../../utils/api";
