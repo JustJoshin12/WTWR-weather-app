@@ -77,8 +77,8 @@ function App() {
   const filteredCards = clothingItems.filter((item) => {
     return item.weather === weatherType;
   });
-
   
+
   // Setter Functions
 
   
