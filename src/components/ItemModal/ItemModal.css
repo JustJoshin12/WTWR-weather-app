@@ -47,4 +47,25 @@
 
 .modal__item-info {
  padding: 32px;
+ 
+}
+
+.modal__item-delete-button {
+  position: relative;
+  font-family: "CabinetGrotesk-Bold", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #ff4d00;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  height: 0;
+  left: 320px;
+  top: -35px;
+  margin-top: 10px;
+}
+
+.modal__item-delete-button:hover {
+  cursor: pointer;
 }

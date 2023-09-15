@@ -1,6 +1,6 @@
 import "../AddItemModal/AddItemModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function AddItemModal({onClose, onAddItem, isOpen}) {
   const [name, setName] = useState("")
@@ -24,6 +24,15 @@ function AddItemModal({onClose, onAddItem, isOpen}) {
     e.preventDefault();
     onAddItem({ name, link, weatherType })
   }
+
+  useEffect(() => {
+    if (isOpen) {
+      setName("");
+      setWeatherType("");
+      setUrl("");
+    }
+  }, [isOpen]);
+  
   return (
     <ModalWithForm title="New Garment" onClose={onClose} isOpen={isOpen} onSubmit={handleSubmit}>
       <div className="modal__form-contents">
@@ -47,7 +56,6 @@ function AddItemModal({onClose, onAddItem, isOpen}) {
             type="url"
             name="link"
             minLength="1"
-            maxLength="30"
             placeholder="Image URL"
             value={link}
             onChange={handleUrlChange}

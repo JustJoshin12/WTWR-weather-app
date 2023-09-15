@@ -14,8 +14,8 @@ import "./App.css";
 import { useState, useEffect, useMemo } from "react";
 import { CurrentTemperatureUnitContext } from "../contexts/CurrentTemperatureUnitContext";
 import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
-import { defaultClothingItems } from "../../utils/constant";
 import Profile from "../Profile/Profile";
+import { addItems, getItems, deleteItem } from "../../utils/api";
 
 
 function App() {
@@ -27,6 +27,7 @@ function App() {
   const [day, setDay] = useState(true);
   const [location, setLocation] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([])
 
   //  Use Effects
 
@@ -43,7 +44,6 @@ function App() {
         } else {
           setDay(false);
         }
-        console.log(parseWeatherConditon(data));
         setLocation(parseWeatherLocation(data));
         setWeatherCondition(parseWeatherConditon(data));
         setTemp(parseWeatherData(data));
@@ -51,6 +51,13 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
+    getItems()
+    .then((data) => {
+      setClothingItems(data)
+    })
+    .catch((error) => {
+      console.error(error)
+    })
   }, []);
 
   const weatherType = useMemo(() => {
@@ -63,15 +70,18 @@ function App() {
     }
   }, []);
 
-  const filteredCards = defaultClothingItems.filter((item) => {
-    return item.weather.toLowerCase() === weatherType;
+
+
+  
+
+  const filteredCards = clothingItems.filter((item) => {
+    return item.weather === weatherType;
   });
 
-  console.log(filteredCards);
-
+  
   // Setter Functions
 
-  console.log(temp);
+  
 
   const handleCreateModal = () => {
     setActiveModal("create");
@@ -92,8 +102,36 @@ function App() {
   };
 
   const onAddItem = (values) => {
-    console.log(values);
+    const name = values.name;
+    const imageUrl = values.link;
+    const weather = values.weatherType;
+
+    addItems(name,imageUrl,weather)
+    .then((data) => {
+      setClothingItems([data, ...clothingItems]);
+      handleCloseModal();
+    })
+    .catch((error) => {
+      console.error(error.status)
+    })
+
   };
+
+  
+
+  const onDeleteCard = (selectedCard) => {
+    deleteItem(selectedCard)
+    .then(() => {
+      const newClothingItems = clothingItems.filter((cards) => {
+        return cards._id !== selectedCard._id
+      })
+      setClothingItems(newClothingItems);
+      handleCloseModal();
+    })
+    .catch((error) => {
+      console.error(error.status);
+    })
+  }
 
   return (
     <div>
@@ -124,7 +162,7 @@ function App() {
           />
         )}
         {activeModal === "preview" && (
-          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
+          <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} handleDeleteCard={onDeleteCard}/>
         )}
       </CurrentTemperatureUnitContext.Provider>
     </div>
