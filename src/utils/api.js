@@ -12,7 +12,7 @@ export const getItems = () => {
     })
 }
 
-export const addItems = (name,imageUrl,weather) => {
+export const addItems = ({name,imageUrl,weather}) => {
     return fetch(`${baseUrl}/items`, {
         method: "POST",
         headers: {

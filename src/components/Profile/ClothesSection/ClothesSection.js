@@ -15,7 +15,7 @@ const ClothesSection = ({filteredCards, onSelectCard, onCreateModal}) => {
             <ItemCard
               item={item}
               onSelectCard={onSelectCard}
-              key={item.id}
+              key={item._id}
             />
           ))}
         </div>

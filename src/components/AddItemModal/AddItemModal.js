@@ -4,32 +4,31 @@ import { useState, useEffect } from "react";
 
 function AddItemModal({onClose, onAddItem, isOpen}) {
   const [name, setName] = useState("")
-  const [link, setUrl] = useState("")
-  const [weatherType, setWeatherType] = useState("")
+  const [imageUrl, setImageUrl] = useState("")
+  const [weather, setWeather] = useState("")
 
   const handleNameChange = (e) => {
     setName(e.target.value)
   }
   
   const handleUrlChange = (e) => {
-    setUrl(e.target.value)
+    setImageUrl(e.target.value)
   }
 
   const handleWeatherTypeChange = (e) => {
-    setWeatherType(e.target.value)
-    console.log(weatherType)
+    setWeather(e.target.value)
   }
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, link, weatherType })
+    onAddItem({ name, imageUrl, weather })
   }
 
   useEffect(() => {
     if (isOpen) {
       setName("");
-      setWeatherType("");
-      setUrl("");
+      setWeather("");
+      setImageUrl("");
     }
   }, [isOpen]);
   
@@ -57,7 +56,7 @@ function AddItemModal({onClose, onAddItem, isOpen}) {
             name="link"
             minLength="1"
             placeholder="Image URL"
-            value={link}
+            value={imageUrl}
             onChange={handleUrlChange}
           />
         </label>
