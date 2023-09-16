@@ -38,11 +38,12 @@ function App() {
       .catch((error) => {
         console.error(error);
       });
-  });
+  }, []);
 
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
+        console.log(data)
         const currentTime = Date.now();
         const weatherTimeData = timeOfDayData(data);
         if (
@@ -100,6 +101,7 @@ function App() {
     console.log(values);
     addItems(values)
       .then((data) => {
+        console.log(data)
         setClothingItems([data, ...clothingItems]);
         handleCloseModal();
       })

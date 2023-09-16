@@ -24,6 +24,7 @@ export const addItems = ({name,imageUrl,weather}) => {
             weather: weather,
         })
     })
+    .then(checkResponse);
 }
 
 export const deleteItem = (selectedCard) => {

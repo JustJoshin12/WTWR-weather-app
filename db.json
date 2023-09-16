@@ -113,6 +113,18 @@
       "imageUrl": "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/3b506591ce951dbc5913ca9525caef70.jpg?imageView2/2/w/800/q/70",
       "weather": "cold",
       "_id": 18
+    },
+    {
+      "name": "Cargo Pants",
+      "imageUrl": "https://img.kwcdn.com/product/Fancyalgo/VirtualModelMatting/015d7d23a67bd135b786fdcf94aa0521.jpg?imageView2/2/w/800/q/70",
+      "weather": "cold",
+      "_id": 19
+    },
+    {
+      "name": "Rain Hat",
+      "imageUrl": "https://scene7.zumiez.com/is/image/zumiez/product_main_medium/adidas-Originals-Washed-Red-Bucket-Hat-_324968-front-US.jpg",
+      "weather": "cold",
+      "_id": 20
     }
   ]
 }
