@@ -1,5 +1,5 @@
 import "../SideBar/SideBar.css";
-import avatar from "../../../images/avatar.svg"
+import avatar from "../../../images/avatar.svg";
 
 const SideBar = () => {
   return (
@@ -12,5 +12,4 @@ const SideBar = () => {
   );
 };
 
-
-export default SideBar
+export default SideBar;

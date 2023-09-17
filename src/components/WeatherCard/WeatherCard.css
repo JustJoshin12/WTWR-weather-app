@@ -1,35 +1,33 @@
 @font-face {
-    font-family: "Cabinet Grotesk";
-    src: url("../../fonts/CabinetGrotesk-Medium.woff") format("woff");
-  }
-
+  font-family: "Cabinet Grotesk";
+  src: url("../../fonts/CabinetGrotesk-Medium.woff") format("woff");
+}
 
 .weather__info {
   color: #fff;
-  font-family: 'Cabinet Grotesk';
+  font-family: "Cabinet Grotesk";
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
-  line-height: 40px; 
+  line-height: 40px;
 }
 
 .weather {
-    position: relative;
-  }
-  
-  .weather__info {
-    position: absolute;
-    top: 20px;
-    left: 16px;
-    font-size: 36px;
-    color: #fff;
-    font-family: 'Cabinet Grotesk';
-    font-style: normal;
-    font-weight: 700;
-    line-height: 40px; 
-  }
-  
-  .weather__image {
-    width: 100%;
-  }
-  
+  position: relative;
+}
+
+.weather__info {
+  position: absolute;
+  top: 20px;
+  left: 16px;
+  font-size: 36px;
+  color: #fff;
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.weather__image {
+  width: 100%;
+}

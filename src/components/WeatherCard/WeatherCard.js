@@ -6,14 +6,14 @@ function WeatherCard({ day, type, weatherTemp = "", tempUnit }) {
   const weatherOption = weatherOptions.find(
     (i) => i.day === day && i.type === type
   );
-  
-  
 
   const imageSrcUrl = weatherOption?.url || "";
- 
+
   return (
     <section className="weather" id="weather">
-      <div className="weather__info">{weatherTemp}° {tempUnit}</div>
+      <div className="weather__info">
+        {weatherTemp}° {tempUnit}
+      </div>
 
       <img
         src={imageSrcUrl}

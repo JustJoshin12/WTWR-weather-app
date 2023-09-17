@@ -1,9 +1,7 @@
 @font-face {
-    font-family: "Cabinet Grotesk";
-    src: url("../../fonts/CabinetGrotesk-Medium.woff") format("woff");
-  }
-  
-
+  font-family: "Cabinet Grotesk";
+  src: url("../../fonts/CabinetGrotesk-Medium.woff") format("woff");
+}
 
 .footer {
   display: flex;
@@ -17,5 +15,5 @@
   font-family: "Cabinet Grotesk";
   font-size: 16px;
   font-weight: 500;
-  line-height: 20px; 
+  line-height: 20px;
 }
