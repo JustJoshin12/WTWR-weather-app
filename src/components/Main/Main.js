@@ -14,7 +14,7 @@ function Main({
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
-  const tempUnit = { currentTemperatureUnit }.currentTemperatureUnit;
+  
 
   return (
     <main className="main">
@@ -22,11 +22,10 @@ function Main({
         day={day}
         type={weatherCondition}
         weatherTemp={temp}
-        tempUnit={tempUnit}
       />
       <section className="card__section" id="card-section">
         <div className="card__section__title">
-          Today is {temp}° {tempUnit} / You may want to wear:
+          Today is {temp}° {currentTemperatureUnit} / You may want to wear:
         </div>
         <div className="card__items">
           {filteredCards.map((item) => {
