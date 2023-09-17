@@ -14,15 +14,10 @@ function Main({
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
-  
 
   return (
     <main className="main">
-      <WeatherCard
-        day={day}
-        type={weatherCondition}
-        weatherTemp={temp}
-      />
+      <WeatherCard day={day} type={weatherCondition} weatherTemp={temp} />
       <section className="card__section" id="card-section">
         <div className="card__section__title">
           Today is {temp}° {currentTemperatureUnit} / You may want to wear:
