@@ -12,11 +12,19 @@ import { timeOfDayData } from "../../utils/WeatherAPI/WeatherAPI";
 import { parseWeatherLocation } from "../../utils/WeatherAPI/WeatherAPI";
 import { useState, useEffect, useMemo } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
-import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
+import {
+  Switch,
+  Route,
+  useHistory,
+} from "react-router-dom/cjs/react-router-dom";
 import Profile from "../Profile/Profile";
-import { addItems, getItems, deleteItem } from "../../utils/api";
+import { addItems, getItems, deleteItem, editUserProfile } from "../../utils/api";
+import { register } from "../../utils/auth";
 
 function App() {
+  const history = useHistory();
+  const appContextValue = { state: { loggedIn, userData } };
+
   // Use States
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
@@ -26,6 +34,8 @@ function App() {
   const [location, setLocation] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userData, setUserData] = useState(null);
 
   //  Use Effects
 
@@ -96,6 +106,24 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleRegistrationModal = () => {
+    setActiveModal("signup");
+  };
+
+  const handleEditModal = () => {
+    setActiveModal("update");
+  };
+
+  const handleLoginModal = () => {
+    setActiveModal("login");
+  };
+
+  const handleLogOut = () => {
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+    history.push("/");
+  };
+
   const onAddItem = (values) => {
     console.log(values);
     addItems(values)
@@ -122,6 +150,43 @@ function App() {
         console.error(error.status);
       });
   };
+
+  const handleRegistration = (name, email, password, avatar) => {
+    register(name, email, password, avatar)
+      .then((res) => {
+        setLoggedIn(true);
+        setUserData(res.data);
+        handleCloseModal();
+        history.push("/profile");
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setLoggedIn(false);
+      });
+  };
+
+  const handleLogin = (email, password) => {
+    signin(email, password)
+      .then((res) => {
+        return res;
+      })
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem;
+        }
+      });
+  };
+
+  const handleUpdate = (data) => {
+    editUserProfile(data)
+    .then((res) => {
+      setUserData(res.data);
+      handleCloseModal();
+    })
+    .catch((err) => console.error(err))
+  }
 
   return (
     <CurrentTemperatureUnitContext.Provider

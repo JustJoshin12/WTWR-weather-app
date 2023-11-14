@@ -33,3 +33,35 @@ export const deleteItem = (selectedCard) => {
     return checkResponse(res);
   });
 };
+
+export const addCardLike = (itemId) => {
+   return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "PUT",
+    headers: {
+      "Content-type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+   }).then((res) => checkResponse(res));
+};
+
+export const removeCardLike = () => {
+  return fetch(`${baseUrl}/items/${itemId}/likes`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+  }).then((res) => checkResponse(res));
+};
+
+export const editUserProfile = ({name, avatar}) => {
+  const token = localStorage.getItem("jwt");
+  return fetch(`${baseUrl}/user/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ name, avatar}),
+  }).then((res) => checkResponse(res));
+}    
