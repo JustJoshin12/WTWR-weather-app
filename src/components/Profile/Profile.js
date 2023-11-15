@@ -2,14 +2,26 @@ import "../Profile/Profile.css";
 import SideBar from "./SideBar/Sidebar";
 import ClothesSection from "./ClothesSection/ClothesSection";
 
-const Profile = ({ filteredCards, onSelectCard, onCreateModal }) => {
+const Profile = ({
+  onSelectCard,
+  onCreateModal,
+  clothingItems,
+  handleLikeClick,
+  onEditModal,
+  logout,
+  loggedIn,
+  selectedCard,
+}) => {
   return (
     <main className="profile">
-      <SideBar />
+      <SideBar handleLogout={logout} handleEditModal={onEditModal}/>
       <ClothesSection
-        filteredCards={filteredCards}
         onSelectCard={onSelectCard}
         onCreateModal={onCreateModal}
+        clothingItems={clothingItems}
+        onCardLike={handleLikeClick}
+        loggedIn={loggedIn}
+        setSelectedCard={selectedCard}
       />
     </main>
   );

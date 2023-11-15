@@ -1,0 +1,44 @@
+@font-face {
+    font-family: Cabinet Grotesk;
+    src: "../fonts/CabinetGrotesk-Black.woff";
+  }
+  
+  .modal__input-title {
+    color: #000;
+    font-family: "Cabinet Grotesk";
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-top: 24px;
+    margin-bottom: 8px;
+  }
+  
+  .modal__input {
+    color: rgba(0, 0, 0, 0.5);
+    font-family: "Cabinet Grotesk";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px;
+    border: none;
+    width: 100%;
+    border-bottom: 1px solid;
+    padding-top: 20px;
+  }
+  
+  .modal__submit-button {
+    display: inline-flex;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 20px;
+    left: 34px;
+  }
+  
+  .modal__submit-button:hover {
+    cursor: pointer;
+  }

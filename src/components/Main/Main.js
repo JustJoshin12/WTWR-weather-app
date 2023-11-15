@@ -3,14 +3,16 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 
 import { useContext } from "react";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import  CurrentTemperatureUnitContext  from "../../contexts/CurrentTemperatureUnitContext";
 
 function Main({
   weatherTemp,
-  filteredCards,
+  parsedCards,
   onSelectCard,
   day,
   weatherCondition,
+  onCardLike,
+  loggedIn,
 }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
@@ -23,12 +25,14 @@ function Main({
           Today is {temp}° {currentTemperatureUnit} / You may want to wear:
         </div>
         <div className="card__items">
-          {filteredCards.map((item) => {
+          {parsedCards.map((item) => {
             return (
               <ItemCard
                 item={item}
                 key={item._id}
                 onSelectCard={onSelectCard}
+                loggedIn={loggedIn}
+                onCardLike={onCardLike}
               />
             );
           })}

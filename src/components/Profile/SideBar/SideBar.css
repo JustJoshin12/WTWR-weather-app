@@ -18,3 +18,10 @@
   font-weight: 700;
   white-space: nowrap;
 }
+
+.sidebar__avatar-placeholder {
+  border-radius: 25%;
+  background-color: white;
+  font-family: Cabinet Grotesk;
+
+}

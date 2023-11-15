@@ -1,13 +1,29 @@
 import "../SideBar/SideBar.css";
-import avatar from "../../../images/avatar.svg";
+import  userDataContext  from "../../../contexts/userDataContext";
+import { useContext } from "react";
 
-const SideBar = () => {
+const SideBar = ({handleLogout, handleEditModal}) => {
+  const currentUser = useContext(userDataContext);
+  const name = currentUser ? currentUser.name : "";
+  const avatar = currentUser ? currentUser.avatar : undefined;
+  const showAvatar = avatar !== "" ? true : false;
+
+  
   return (
     <div className="sidebar">
       <div>
-        <img src={avatar} alt="avatar logo" className="sidebar__avatar-image" />
+      {showAvatar ? (
+          <img className="sidebar__avatar-image" src={avatar} alt="avatar" />
+        ) : (
+          <p className="sidebar__avatar-placeholder">{name[0]?.toUpperCase()}</p>
+        )}
+       
       </div>
-      <div className="sidebar__avatar-name">Joshua Smith</div>
+      <p className="sidebar__avatar-name">{currentUser?.name}</p>
+      <div className="sidebar__buttons">
+        <buttton className="sidebar__button-edit" onClick={handleEditModal}>Change profile data</buttton>
+        <button className="sidebar__button-logout" onClick={handleLogout}>Log out</button>
+      </div>
     </div>
   );
 };

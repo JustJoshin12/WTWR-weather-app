@@ -7,6 +7,9 @@ export const checkResponse = (res) => {
 export const getItems = () => {
   return fetch(`${baseUrl}/items`, {
     method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
   }).then((res) => {
     return checkResponse(res);
   });
@@ -29,6 +32,10 @@ export const addItems = ({ name, imageUrl, weather }) => {
 export const deleteItem = (selectedCard) => {
   return fetch(`${baseUrl}/items/${selectedCard._id}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
   }).then((res) => {
     return checkResponse(res);
   });
@@ -44,7 +51,7 @@ export const addCardLike = (itemId) => {
    }).then((res) => checkResponse(res));
 };
 
-export const removeCardLike = () => {
+export const removeCardLike = (itemId) => {
   return fetch(`${baseUrl}/items/${itemId}/likes`, {
     method: "DELETE",
     headers: {
@@ -63,5 +70,5 @@ export const editUserProfile = ({name, avatar}) => {
       authorization: `Bearer ${token}`
     },
     body: JSON.stringify({ name, avatar}),
-  }).then((res) => checkResponse(res));
+  }).then((res) => checkResponse(res)); 
 }    

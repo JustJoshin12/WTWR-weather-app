@@ -46,7 +46,6 @@ const RegisterModal = ({
       buttonText="Next"
       onSubmit={handleSubmit}
     >
-      <div>
         <label>
           <p className="modal__input-title">Email*</p>
           <input
@@ -95,10 +94,9 @@ const RegisterModal = ({
             value={avatar}
           />
         </label>
-        <div>
-          <button className="modal__submit-button-login">or Login</button>
+        <div className="modal__button-container">
+          <button className="modal__submit-button-login" onClick={onClickLogin}>or Login</button>
         </div>
-      </div>
     </ModalWithForm>
   );
 };

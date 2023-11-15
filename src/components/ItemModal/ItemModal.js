@@ -1,6 +1,18 @@
 import "../ItemModal/ItemModal.css";
 
-function ItemModal({ selectedCard, onClose, handleDeleteCard }) {
+function ItemModal({
+  selectedCard,
+  onClose,
+  handleDeleteCard,
+  loggedIn,
+  currentUser,
+}) {
+  const isOwn = selectedCard.owner === currentUser._id;
+
+  const itemDeleteButtonClassName = `item__delete-button ${
+    isOwn ? "item__delete-button_visible" : "item__delete-button_hidden"
+  }`;
+
   return (
     <div className={`modal`}>
       <div className="modal__item-content">
@@ -19,13 +31,17 @@ function ItemModal({ selectedCard, onClose, handleDeleteCard }) {
           <div className="modal__item-weatherType">
             Weather: {selectedCard.weather}
           </div>
-          <button
-            className="modal__item-delete-button"
-            type=" button"
-            onClick={() => handleDeleteCard(selectedCard)}
-          >
-            Delete Item
-          </button>
+          {loggedIn && isOwn ? (
+            <button
+              className={itemDeleteButtonClassName}
+              type=" button"
+              onClick={() => handleDeleteCard(selectedCard)}
+            >
+              Delete Item
+            </button>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

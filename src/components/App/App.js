@@ -11,19 +11,30 @@ import { parseWeatherConditon } from "../../utils/WeatherAPI/WeatherAPI";
 import { timeOfDayData } from "../../utils/WeatherAPI/WeatherAPI";
 import { parseWeatherLocation } from "../../utils/WeatherAPI/WeatherAPI";
 import { useState, useEffect, useMemo } from "react";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 import {
   Switch,
   Route,
   useHistory,
 } from "react-router-dom/cjs/react-router-dom";
 import Profile from "../Profile/Profile";
-import { addItems, getItems, deleteItem, editUserProfile } from "../../utils/api";
-import { register } from "../../utils/auth";
+import {
+  addItems,
+  getItems,
+  deleteItem,
+  editUserProfile,
+  removeCardLike,
+} from "../../utils/Api";
+import { checkToken, register } from "../../utils/auth";
+import AppContext from "../../contexts/AppContext";
+import userDataContext from "../../contexts/userDataContext";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
 
-function App() {
+const App = () => {
   const history = useHistory();
-  const appContextValue = { state: { loggedIn, userData } };
 
   // Use States
   const [activeModal, setActiveModal] = useState("");
@@ -36,6 +47,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
   //  Use Effects
 
@@ -72,6 +84,22 @@ function App() {
       });
   }, []);
 
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      checkToken(token)
+        .then((data) => {
+          setCurrentUser(data.data);
+          setLoggedIn(true);
+        })
+        .catch(() => console.error);
+    } else {
+      localStorage.removeItem("jwt");
+      setLoggedIn(false);
+      console.log("Token not Found");
+    }
+  }, [loggedIn, history]);
+
   const weatherType = useMemo(() => {
     if (temp >= 86) {
       return "hot";
@@ -85,6 +113,8 @@ function App() {
   const filteredCards = clothingItems.filter((item) => {
     return item.weather === weatherType;
   });
+
+  const appContextValue = { state: { loggedIn, userData } };
 
   // Setter Functions
 
@@ -155,7 +185,7 @@ function App() {
     register(name, email, password, avatar)
       .then((res) => {
         setLoggedIn(true);
-        setUserData(res.data);
+        setCurrentUser(res.data);
         handleCloseModal();
         history.push("/profile");
       })
@@ -174,60 +204,136 @@ function App() {
       })
       .then((data) => {
         if (data.token) {
-          localStorage.setItem;
+          localStorage.setItem("jwt", data.token);
+
+          checkToken(data.token)
+            .then((res) => {
+              setLoggedIn(true);
+              setCurrentUser(res.data);
+              handleCloseModal();
+              history.push("/profile");
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          return;
         }
       });
   };
 
   const handleUpdate = (data) => {
     editUserProfile(data)
-    .then((res) => {
-      setUserData(res.data);
-      handleCloseModal();
-    })
-    .catch((err) => console.error(err))
-  }
+      .then((res) => {
+        setCurrentUser(res.data);
+        handleCloseModal();
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleLikeClick = ({ _id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+
+    isLiked
+      ? removeCardLike(_id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((card) => (card._id === _id ? updatedCard : card))
+            );
+          })
+          .catch((err) => console.log(err))
+      : addCardLike(_id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((card) => (card._id === _id ? updatedCard : card))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
 
   return (
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <Header location={location} onCreateModal={handleCreateModal} />
-      <Switch>
-        <Route exact path="/">
-          <Main
-            day={day}
-            weatherCondition={weatherCondition}
-            weatherTemp={temp}
-            onSelectCard={handleSelectedCard}
-            filteredCards={filteredCards}
-          />
-        </Route>
-        <Route path="/profile">
-          <Profile
-            filteredCards={filteredCards}
-            onSelectCard={handleSelectedCard}
+      <userDataContext.Provider value={currentUser}>
+        <div>
+          <Header
+            location={location}
             onCreateModal={handleCreateModal}
+            onSignupModal={handleRegistrationModal}
+            onLoginModal={handleLoginModal}
+            loggedIn={loggedIn}
           />
-        </Route>
-      </Switch>
-      <Footer />
-      {activeModal === "create" && (
-        <AddItemModal
-          onClose={handleCloseModal}
-          onAddItem={onAddItem}
-          isOpen={activeModal === "create"}
-        />
-      )}
-      {activeModal === "preview" && (
-        <ItemModal
-          selectedCard={selectedCard}
-          onClose={handleCloseModal}
-          handleDeleteCard={onDeleteCard}
-        />
-      )}
+          <Switch>
+            <Route exact path="/">
+              <Main
+                day={day}
+                weatherCondition={weatherCondition}
+                weatherTemp={temp}
+                onSelectCard={handleSelectedCard}
+                loggedIn={loggedIn}
+                onCardLike={handleLikeClick}
+                parsedCards={filteredCards}
+              />
+            </Route>
+            <ProtectedRoute path="/profile">
+              <Profile
+                onSelectCard={handleSelectedCard}
+                onCreateModal={handleCreateModal}
+                clothingItems={clothingItems}
+                handleLikeClick={handleLikeClick}
+                onEditModal={handleEditModal}
+                logout={handleLogOut}
+                loggedIn={loggedIn}
+                selectedCard={selectedCard}
+              />
+            </ProtectedRoute>
+          </Switch>
+          <Footer />
+          {activeModal === "create" && (
+            <AddItemModal
+              onClose={handleCloseModal}
+              onAddItem={onAddItem}
+              isOpen={activeModal === "create"}
+            />
+          )}
+          {activeModal === "preview" && (
+            <ItemModal
+              selectedCard={selectedCard}
+              onClose={handleCloseModal}
+              handleDeleteCard={onDeleteCard}
+              currentUser={currentUser}
+              loggedIn={loggedIn}
+            />
+          )}
+          {activeModal === "signup" && (
+            <RegisterModal
+              onClose={handleCloseModal}
+              isOpen={activeModal === "create"}
+              handleRegistration={handleRegistration}
+              setActiveModal={setActiveModal}
+            />
+          )}
+          {activeModal === "login" && (
+            <LoginModal
+              onClose={handleCloseModal}
+              isOpen={activeModal === "login"}
+              handleLogin={handleLogin}
+              setActiveModal={setActiveModal}
+            />
+          )}
+          {activeModal === "update" && (
+            <EditProfileModal
+              onClose={handleCloseModal}
+              isOpen={activeModal === "update"}
+              onSubmit={handleUpdate}
+              currentUser={currentUser}
+            />
+          )}
+        </div>
+      </userDataContext.Provider>
     </CurrentTemperatureUnitContext.Provider>
   );
-}
+};
 
 export default App;
