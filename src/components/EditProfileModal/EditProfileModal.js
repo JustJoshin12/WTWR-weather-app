@@ -28,7 +28,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, currentUser }) => {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
-      buttonText="Submit Changes"
+      buttonText="Save Changes"
       title="Sign up"
     >
       <label>

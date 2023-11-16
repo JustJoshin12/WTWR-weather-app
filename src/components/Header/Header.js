@@ -1,9 +1,8 @@
 import "./Header.css";
 import wtwrLogo from "../../images/logo.svg";
-import avatar from "../../images/avatar.svg";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { Link } from "react-router-dom";
-import  userDataContext  from "../../contexts/userDataContext";
+import  UserDataContext  from "../../contexts/userDataContext";
 import { useContext } from "react";
 
 function Header({ onCreateModal, location, loggedIn, onSignupModal, onLoginModal }) {
@@ -12,7 +11,7 @@ function Header({ onCreateModal, location, loggedIn, onSignupModal, onLoginModal
     day: "numeric",
   });
 
-  const currentUser = useContext(userDataContext);
+  const currentUser = useContext(UserDataContext);
   const avatar = currentUser ? currentUser.avatar : undefined;
   const showAvatar = avatar !== "" ? true : false;
   const name = currentUser ? currentUser.name : "";
@@ -40,7 +39,7 @@ function Header({ onCreateModal, location, loggedIn, onSignupModal, onLoginModal
                 + New Clothes
               </button>
             </div>
-            <Link to="/profile">{currentUser?.name}</Link>
+            <Link to="/profile" className="header__username" >{currentUser.name}</Link>
             <div>
               {showAvatar ? (
                 <img className="header__avatar" src={avatar} alt="avatar" />

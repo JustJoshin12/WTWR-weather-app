@@ -21,13 +21,17 @@
 }
 
 .modal__item-close-button {
-  background: url(../../images/CloseButtonWhite.svg) no-repeat center;
+  background: url(../../images/CloseButton.svg) no-repeat center;
   width: 16px;
   height: 16px;
   position: absolute;
   top: 24px;
   right: 24px;
   border: none;
+}
+
+.modal__item-close-button:hover {
+  cursor: pointer;
 }
 
 .modal__item-content {

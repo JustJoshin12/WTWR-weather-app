@@ -80,3 +80,11 @@
   font-style: normal;
   font-weight: 700;
 }
+
+.header__username {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+}

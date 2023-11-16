@@ -13,7 +13,7 @@ export const signin = ({ email, password }) => {
 };
 
 
-export const register = (email, password, name, avatar, token) => {
+export const register = ({email, password, name, avatar, token}) => {
   return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {

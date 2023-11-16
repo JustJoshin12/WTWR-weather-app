@@ -8,8 +8,11 @@ function WeatherCard({ day, type, weatherTemp = "" }) {
   const weatherOption = weatherOptions.find(
     (i) => i.day === day && i.type === type
   );
+ 
+
 
   const imageSrcUrl = weatherOption?.url || "";
+
 
   return (
     <section className="weather" id="weather">

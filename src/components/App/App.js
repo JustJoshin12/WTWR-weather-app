@@ -25,9 +25,8 @@ import {
   editUserProfile,
   removeCardLike,
 } from "../../utils/Api";
-import { checkToken, register } from "../../utils/auth";
-import AppContext from "../../contexts/AppContext";
-import userDataContext from "../../contexts/userDataContext";
+import { checkToken, register, signin } from "../../utils/auth";
+import UserDataContext from "../../contexts/userDataContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
@@ -46,8 +45,7 @@ const App = () => {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [clothingItems, setClothingItems] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userData, setUserData] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({});
 
   //  Use Effects
 
@@ -64,7 +62,6 @@ const App = () => {
   useEffect(() => {
     getForecastWeather()
       .then((data) => {
-        console.log(data);
         const currentTime = Date.now();
         const weatherTimeData = timeOfDayData(data);
         if (
@@ -89,7 +86,7 @@ const App = () => {
     if (token) {
       checkToken(token)
         .then((data) => {
-          setCurrentUser(data.data);
+          setCurrentUser(data);
           setLoggedIn(true);
         })
         .catch(() => console.error);
@@ -114,7 +111,6 @@ const App = () => {
     return item.weather === weatherType;
   });
 
-  const appContextValue = { state: { loggedIn, userData } };
 
   // Setter Functions
 
@@ -155,10 +151,8 @@ const App = () => {
   };
 
   const onAddItem = (values) => {
-    console.log(values);
     addItems(values)
       .then((data) => {
-        console.log(data);
         setClothingItems([data, ...clothingItems]);
         handleCloseModal();
       })
@@ -185,7 +179,7 @@ const App = () => {
     register(name, email, password, avatar)
       .then((res) => {
         setLoggedIn(true);
-        setCurrentUser(res.data);
+        setCurrentUser(res);
         handleCloseModal();
         history.push("/profile");
       })
@@ -199,9 +193,6 @@ const App = () => {
 
   const handleLogin = (email, password) => {
     signin(email, password)
-      .then((res) => {
-        return res;
-      })
       .then((data) => {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
@@ -209,7 +200,7 @@ const App = () => {
           checkToken(data.token)
             .then((res) => {
               setLoggedIn(true);
-              setCurrentUser(res.data);
+              setCurrentUser(res);
               handleCloseModal();
               history.push("/profile");
             })
@@ -222,10 +213,11 @@ const App = () => {
       });
   };
 
+ 
   const handleUpdate = (data) => {
     editUserProfile(data)
       .then((res) => {
-        setCurrentUser(res.data);
+        setCurrentUser(res);
         handleCloseModal();
       })
       .catch((err) => console.error(err));
@@ -255,7 +247,7 @@ const App = () => {
     <CurrentTemperatureUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleSwitchChange }}
     >
-      <userDataContext.Provider value={currentUser}>
+      <UserDataContext.Provider value={currentUser}>
         <div>
           <Header
             location={location}
@@ -331,7 +323,7 @@ const App = () => {
             />
           )}
         </div>
-      </userDataContext.Provider>
+      </UserDataContext.Provider>
     </CurrentTemperatureUnitContext.Provider>
   );
 };

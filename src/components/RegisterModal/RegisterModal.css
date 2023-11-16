@@ -26,18 +26,6 @@
     padding-top: 20px;
   }
   
-  .modal__submit-button {
-    display: inline-flex;
-    padding: 8px 16px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.3);
-    position: absolute;
-    bottom: 20px;
-    left: 34px;
-  }
   
   .modal__submit-button:hover {
     cursor: pointer;
@@ -51,8 +39,8 @@
     font-weight: 700;
     line-height: 20px;
     position: absolute;
-    bottom: 25px;
-    left: 110px;
+    bottom: 42px;
+    left: 156px;
     background-color: white;
     border: none;
   }

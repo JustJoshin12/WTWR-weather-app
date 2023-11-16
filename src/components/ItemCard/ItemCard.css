@@ -22,6 +22,7 @@
   line-height: 20px;
   background-color: white;
   padding: 0 12px;
+  text-align: center;
 }
 
 .card__image {
@@ -45,3 +46,19 @@
   font-weight: 700;
   line-height: 24px;
 }
+
+.card__like-button {
+  width: 22px;
+  height: 19px;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+  background: url(../../images/heart.svg) no-repeat;
+  border: none;
+  position: absolute;
+}
+
+.card__likeButton-active {
+  background-image: url(../../images/likeHeartActive.svg);
+}
+
+
