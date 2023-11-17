@@ -62,10 +62,10 @@ export const removeCardLike = (itemId) => {
   }).then((res) => checkResponse(res));
 };
 
-export const editUserProfile = (name, avatar) => {
+export const editUserProfile = ({name, avatar}) => {
   const token = localStorage.getItem("jwt");
-  
-  return fetch(`${baseUrl}/me`, {
+
+  return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",

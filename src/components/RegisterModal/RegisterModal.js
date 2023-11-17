@@ -62,7 +62,7 @@ const RegisterModal = ({
           <p className="modal__input-title">Password*</p>
           <input
             className="modal__input"
-            type="text"
+            type="password"
             placeholder="Password"
             name="password"
             required

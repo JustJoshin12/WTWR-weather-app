@@ -41,6 +41,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, currentUser }) => {
           maxLength="30"
           value={name}
           onChange={handleNameChange}
+          required
         />
       </label>
       <label>
@@ -52,6 +53,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, currentUser }) => {
           placeholder={currentUser.avatar}
           value={avatar}
           onChange={handleAvatarChange}
+          required
         />
       </label>
     </ModalWithForm>
