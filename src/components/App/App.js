@@ -24,6 +24,7 @@ import {
   deleteItem,
   editUserProfile,
   removeCardLike,
+  addCardLike,
 } from "../../utils/Api";
 import { checkToken, register, signin } from "../../utils/auth";
 import UserDataContext from "../../contexts/userDataContext";
@@ -111,7 +112,6 @@ const App = () => {
     return item.weather === weatherType;
   });
 
-
   // Setter Functions
 
   const handleCreateModal = () => {
@@ -192,56 +192,60 @@ const App = () => {
   };
 
   const handleLogin = (email, password) => {
-    signin(email, password)
-      .then((data) => {
-        if (data.token) {
-          localStorage.setItem("jwt", data.token);
+    signin(email, password).then((data) => {
+      if (data.token) {
+        localStorage.setItem("jwt", data.token);
 
-          checkToken(data.token)
-            .then((res) => {
-              setLoggedIn(true);
-              setCurrentUser(res);
-              handleCloseModal();
-              history.push("/profile");
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-        } else {
-          return;
-        }
-      });
+        checkToken(data.token)
+          .then((res) => {
+            setLoggedIn(true);
+            setCurrentUser(res);
+            handleCloseModal();
+            history.push("/profile");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        return;
+      }
+    });
   };
 
- 
-  const handleUpdate = (data) => {
-    editUserProfile(data)
+
+  const handleUpdate = ({name,avatar}) => {
+   
+    console.log({name,avatar})
+    editUserProfile({name,avatar})
       .then((res) => {
         setCurrentUser(res);
         handleCloseModal();
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {console.log(err)});
   };
 
-  const handleLikeClick = ({ _id, isLiked }) => {
-    const token = localStorage.getItem("jwt");
 
+  const handleLikeClick = ({ id, isLiked, user }) => {
+    const token = localStorage.getItem("jwt");
+    
     isLiked
-      ? removeCardLike(_id, token)
+      ? removeCardLike(id, token)
           .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((card) => (card._id === _id ? updatedCard : card))
+            setClothingItems((clothingItems) =>
+              clothingItems.map((c) => (c._id === id ? updatedCard : c))
             );
           })
           .catch((err) => console.log(err))
-      : addCardLike(_id, token)
+      : addCardLike(id, token)
           .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((card) => (card._id === _id ? updatedCard : card))
+            setClothingItems((clothingItems) =>
+              clothingItems.map((c) => (c._id === id ? updatedCard : c))
             );
           })
           .catch((err) => console.log(err));
   };
+
+  
 
   return (
     <CurrentTemperatureUnitContext.Provider

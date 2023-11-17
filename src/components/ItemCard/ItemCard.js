@@ -5,7 +5,6 @@ import userDataContext from "../../contexts/userDataContext";
 const ItemCard = ({
   item,
   onSelectCard,
-
   onCardLike,
 }) => {
   const currentUser = useContext(userDataContext);
@@ -18,23 +17,25 @@ const ItemCard = ({
     : "card__like-button ";
 
   const handleLikeClick = () => {
-    onCardLike({ _id: cardId, isLiked: isLiked, user: userId });
+    onCardLike({ id: cardId, isLiked: isLiked, user: userId });
   };
 
   return (
     <div className="card__item">
-      <h2 className="card__name">{item.name}</h2>
+      <div className="card__info">
+        <h2 className="card__name">{item.name}</h2>
+        <button
+          className={likeButtonClassName}
+          type="button"
+          onClick={handleLikeClick}
+        ></button>
+      </div>
       <img
         alt={item.name}
         className="card__image"
-        src={item.link}
+        src={item.imageUrl}
         onClick={() => onSelectCard(item)}
       />
-      <button
-        className={likeButtonClassName}
-        type="button"
-        onClick={handleLikeClick}
-      ></button>
     </div>
   );
 };

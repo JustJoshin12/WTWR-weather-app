@@ -20,7 +20,7 @@ const SideBar = ({handleLogout, handleEditModal}) => {
         <p className="sidebar__avatar-name">{currentUser.name}</p>
       </div>
       <div className="sidebar__buttons">
-        <buttton className="sidebar__button-edit" onClick={handleEditModal}>Change profile data</buttton>
+        <button className="sidebar__button-edit" onClick={handleEditModal}>Change profile data</button>
         <button className="sidebar__button-logout" onClick={handleLogout}>Log out</button>
       </div>
     </div>

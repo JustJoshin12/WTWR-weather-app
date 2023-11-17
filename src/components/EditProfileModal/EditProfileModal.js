@@ -18,7 +18,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, currentUser }) => {
     const handleSubmit = (e) => {
        e.preventDefault();
 
-       onSubmit({name: name, avatar: avatar});
+       onSubmit( {name, avatar});
     }
 
 
@@ -29,7 +29,7 @@ const EditProfileModal = ({ onClose, isOpen, onSubmit, currentUser }) => {
       isOpen={isOpen}
       onSubmit={handleSubmit}
       buttonText="Save Changes"
-      title="Sign up"
+      title="Change profile data"
     >
       <label>
         <p className="modal__input-title">Name</p>

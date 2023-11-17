@@ -10,11 +10,15 @@
 .card__item {
   position: relative;
 }
+.card__info {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 20px;
+  left: 100px;
+}
 
 .card__name {
-  position: absolute;
-  left: 140px;
-  top: 18px;
   color: rgba(0, 0, 0, 0.6);
   font-family: "Cabinet Grotesk";
   font-size: 16px;
@@ -23,6 +27,8 @@
   background-color: white;
   padding: 0 12px;
   text-align: center;
+  margin: 0;
+  margin-right: 10px;
 }
 
 .card__image {
@@ -54,11 +60,11 @@
   cursor: pointer;
   background: url(../../images/heart.svg) no-repeat;
   border: none;
-  position: absolute;
+  
 }
 
-.card__likeButton-active {
-  background-image: url(../../images/likeHeartActive.svg);
+.card__like-button-active {
+  background: url(../../images/likeHeartActive.svg) no-repeat;
 }
 
 
