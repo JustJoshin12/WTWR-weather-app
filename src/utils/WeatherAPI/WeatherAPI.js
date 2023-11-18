@@ -1,4 +1,4 @@
-import { checkResponse } from "../Api";
+import { checkResponse } from "../api";
 const latitude = 41.9575;
 const longitude = -88.0809;
 const APIkey = "9d88578d96b363adcadf5a0117ea7c43";

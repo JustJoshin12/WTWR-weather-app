@@ -25,7 +25,7 @@ import {
   editUserProfile,
   removeCardLike,
   addCardLike,
-} from "../../utils/Api";
+} from "../../utils/api";
 import { checkToken, register, signin } from "../../utils/auth";
 import UserDataContext from "../../contexts/userDataContext";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
