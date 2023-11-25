@@ -1,6 +1,10 @@
 import { checkResponse } from "./api";
 
-export const baseUrl = "http://localhost:3001";
+export const baseUrl = process.env.NODE_ENV === 'production' 
+  ? 'https://api.weathercloset.jumpingcrab.com'
+  : 'http://localhost:3001';
+
+
 
 export const signin = ({ email, password }) => {
   return fetch(`${baseUrl}/signin`, {
