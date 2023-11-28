@@ -11,6 +11,8 @@ function Header({ onCreateModal, location, loggedIn, onSignupModal, onLoginModal
     day: "numeric",
   });
 
+  console.log(loggedIn);
+
   const currentUser = useContext(UserDataContext);
   const avatar = currentUser ? currentUser.avatar : undefined;
   const showAvatar = avatar !== "" ? true : false;
@@ -39,7 +41,7 @@ function Header({ onCreateModal, location, loggedIn, onSignupModal, onLoginModal
                 + New Clothes
               </button>
             </div>
-            <Link to="/profile" className="header__username" >{currentUser.name}</Link>
+            <Link to="/profile" className="header__username" >{name}</Link>
             <div>
               {showAvatar ? (
                 <img className="header__avatar" src={avatar} alt="avatar" />

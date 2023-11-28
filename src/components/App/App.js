@@ -84,6 +84,7 @@ const App = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
+
     if (token) {
       checkToken(token)
         .then((data) => {
@@ -94,7 +95,6 @@ const App = () => {
     } else {
       localStorage.removeItem("jwt");
       setLoggedIn(false);
-      console.log("Token not Found");
     }
   }, [loggedIn, history]);
 
@@ -175,31 +175,31 @@ const App = () => {
       });
   };
 
-  const handleRegistration = (name, email, password, avatar) => {
-    register(name, email, password, avatar)
+  const handleRegistration = (email, password, name, avatar) => {
+    register({
+      email: email,
+      password: password,
+      name: name,
+      avatar: avatar,
+    })
       .then((res) => {
-        setLoggedIn(true);
-        setCurrentUser(res);
-        handleCloseModal();
-        history.push("/profile");
+        handleLogin(email, password);
       })
       .catch((err) => {
         console.log(err);
       })
-      .finally(() => {
-        setLoggedIn(false);
-      });
   };
 
   const handleLogin = (email, password) => {
-    signin(email, password).then((data) => {
+    signin(email, password)
+    .then((data) => {
       if (data.token) {
         localStorage.setItem("jwt", data.token);
 
         checkToken(data.token)
-          .then((res) => {
+          .then((data) => {
             setLoggedIn(true);
-            setCurrentUser(res);
+            setCurrentUser(data);
             handleCloseModal();
             history.push("/profile");
           })

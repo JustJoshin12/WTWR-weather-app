@@ -17,7 +17,7 @@ const SideBar = ({handleLogout, handleEditModal}) => {
         ) : (
           <p className="sidebar__avatar-placeholder">{name[0]?.toUpperCase()}</p>
         )}
-        <p className="sidebar__avatar-name">{currentUser.name}</p>
+        <p className="sidebar__avatar-name">{name}</p>
       </div>
       <div className="sidebar__buttons">
         <button className="sidebar__button-edit" onClick={handleEditModal}>Change profile data</button>
